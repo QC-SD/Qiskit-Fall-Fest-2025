@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QCSD Qiskit Fall Fest 2025</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <style>
+    :root {
+      /* Brand palette */
+      --white: #ffffff;
+      --black: #0a0a0a;              /* near-black for better contrast */
+      --silver: #c0c0c0;
+      --ibm-pink: #ff7eb6;           /* IBM Carbon Magenta */
+      --ucsd-blue: #00629b;          /* Triton Blue */
+      --ucsd-gold: #c69214;          /* UCSD Gold */
+
+      /* Derived tokens */
+      --bg-dark: #0b0f14;
+      --bg-darker: #06080c;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --card-bg: #111827;            /* slate-900 */
+      --border-subtle: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 400;
+      color: var(--text-main);
+      background: var(--bg-dark);
+    }
+
+    /* Full-screen section panels */
+    section.panel {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 5rem; padding-bottom: 2rem; /* space for fixed navbar */
+    }
+
+    /* Navbar */
+    .navbar { background: var(--bg-darker); border-bottom: 1px solid var(--border-subtle); }
+    .navbar-brand { color: var(--white) !important; }
+    .nav-link { color: var(--text-muted) !important; font-weight: 600; }
+    .nav-link:hover { color: var(--white) !important; }
+    .nav-link.active { color: var(--ibm-pink) !important; }
+    .navbar-brand,
+    .nav-link {
+    font-weight: 400 !important; /* normal weight */
+    }
+
+    .navbar.bg-dark {
+      background-color: #06080c !important; /* your new color */
+    }
+
+    .nav-logo {
+      height: 32px;   /* keeps it small in navbar */
+      width: auto;    /* keeps aspect ratio */
+    }
+    /* Hero */
+    #home {
+      background: radial-gradient(1200px 500px at 70% -10%, rgba(238,83,150,0.25), transparent 60%),
+                  radial-gradient(900px 400px at 20% 110%, rgba(0,98,155,0.25), transparent 60%),
+                  linear-gradient(180deg, var(--bg-darker) 0%, #0e1622 60%, #0b0f14 100%);
+    }
+
+    .hero-title { font-weight: 800; letter-spacing: 0.2px; }
+    .hero-subtitle { opacity: 0.92; max-width: 60ch; }
+
+    /* Buttons: primary = UCSD gold with IBM pink focus/hover */
+    .btn-primary {
+      --bs-btn-bg: var(--ucsd-gold);
+      --bs-btn-border-color: var(--ucsd-gold);
+      --bs-btn-hover-bg: #aa5479;
+      --bs-btn-hover-border-color: #aa5479;
+      --bs-btn-active-bg: #b9820f;
+      --bs-btn-active-border-color: #b9820f;
+      color: var(--black);
+    }
+    .btn-outline-primary {
+      --bs-btn-color: var(--ibm-pink);
+      --bs-btn-border-color: var(--ibm-pink);
+      --bs-btn-hover-bg: var(--ibm-pink);
+      --bs-btn-hover-border-color: var(--ibm-pink);
+      --bs-btn-hover-color: var(--black);
+    }
+
+    .cta-btn { font-size: 1.25rem; padding: 0.9rem 1.4rem; border-radius: 0.85rem; box-shadow: 0 0.5rem 1.25rem rgba(0,0,0,0.28); }
+
+    /* Section backgrounds */
+    .panel.bg-light { background: #0f1622 !important; }
+
+    .section-heading { margin-bottom: 1rem; font-weight: 700; color: var(--white); }
+
+    /* Cards */
+    .team-card { background: var(--card-bg); border: 1px solid var(--border-subtle); border-radius: 1rem; box-shadow: 0 0.75rem 2rem rgba(2, 6, 23, 0.22); }
+    .team-card .card-title { color: var(--white); }
+    .team-card .text-muted { color: var(--silver) !important; }
+    .link-primary { color: var(--ucsd-blue) !important; }
+    .link-primary:hover { color: var(--ibm-pink) !important; }
+
+    /* Image */
+    .logo-img {
+      display: block;              /* centers with margin auto */
+      margin: 1rem auto;           /* center horizontally */
+      max-width: 50vw;             /* no wider than 50% of screen width */
+      max-height: 50vh;            /* no taller than 50% of screen height */
+      height: auto;                /* keep aspect ratio */
+    }
+
+    .cat-sticker {
+      position: absolute;
+      right: 160px;       /* move cat to the right of button */
+      bottom: -20px;      /* move cat slightly below button */
+      width: 12vw;       /* 12% of screen width */
+      max-width: 110px;
+      height: auto;
+      pointer-events: none;   /* make it non-clickable */
+    }
+    .about-main-img {
+      max-height: 400px;
+     object-fit: contain;
+    }
+
+    .ibm-btn {
+      border: 1px solid var(--border-subtle);
+      background: #0f1622;
+      color: #fff;
+    }
+
+    .ibm-btn:hover {
+      background: #151c28;
+    }
+
+    .ibm-mark {
+      height: 18px;
+      width: auto;
+      display: block;
+    }
+
+    /* calendar */
+    .calendar-frame iframe {
+      width: 100%;
+      height: 450px;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Square photos */
+    .team-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-top-left-radius: 1rem;   /* round top corners of the photo */
+      border-top-right-radius: 1rem;
+    }
+
+    /* Icon links */
+    .icon-link {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+      transition: transform 0.2s ease;
+    }
+    .icon-link:hover { transform: scale(1.1); }
+
+    /* Registration CTA */
+    #registration {
+      background: var(--bg-dark);   /* same static dark background */
+      color: var(--white);
+    }
+
+    #registration .mega-cta {
+      padding: 8rem 1rem;
+    }
+
+    #registration .btn-register {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      padding: 2rem 3rem;
+      border-radius: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      box-shadow: 0 0.75rem 2rem rgba(0,0,0,0.35);
+      background: var(--ucsd-gold);
+      color: var(--black);
+      border: 2px solid var(--ucsd-gold);
+    }
+    #registration .btn-register:hover {
+      background: var(--ibm-pink);
+      border-color: var(--ibm-pink);
+      color: var(--black);
+    }
+
+    #registration h2 {
+      margin-bottom: 6rem;   /* default Bootstrap often sets mb-4 (1.5rem) */
+      margin-top: -6rem;   /* optional: pull up slightly */
+    }
+
+
+    /* Stickers */
+    .sticker {
+      position: absolute;
+      width: clamp(120px, 20vw, 220px);
+      height: auto;
+      opacity: 0.9;
+      pointer-events: none; /* decorative only */
+    }
+
+    .sticker-left {
+      left: 5%;
+      bottom: 10%;
+    }
+
+    .sticker-right {
+      right: 5%;
+      bottom: 10%;
+    }
+
+    @media (max-width: 768px) {
+      .sticker {
+      width: 90px;
+      opacity: 0.7;
+    }
+
+    .sticker-left { left: 2%; bottom: 5%; }
+    .sticker-right { right: 2%; bottom: 5%; }
+    }
+
+
+    /* Schedule embed frame */
+    .ratio iframe { border-radius: 0.75rem; border: 1px solid var(--border-subtle) !important; background: #0a0f17; }
+
+    /* Alerts */
+    .alert-info { background-color: rgba(0,98,155,0.12); color: #cfe8f6; border-color: rgba(0,98,155,0.25); }
+
+    /* Footer */
+    footer { background: var(--bg-darker); color: var(--silver); border-top: 1px solid var(--border-subtle); }
+  </style>
+  <!-- IBM Plex Sans font to echo IBM design language -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="80" tabindex="0">
+
+  <!-- Navbar -->
+  <nav id="mainNav" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#home">
+      <img src="assets/Qiskit_03.png" alt="Logo" class="nav-logo me-2">
+      Qiskit Fall Fest at UCSD
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#schedule">Schedule</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+          <li class="nav-item"><a class="nav-link" href="#registration">Registration</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home -->
+  <section id="home" class="panel">
+    <div class="container text-center">
+    <h1 class="hero-title mb-3" style="color: white;">Quantum Computing at UC San Diego</h1>
+    <img src="assets/Badge.png" alt="Qiskit Fall Fest Logo" class="logo-img">
+    <p class="lead mb-4">A month-long celebration of quantum computing: talks, workshops, and hands‑on projects for all levels.</p>
+    <div class="cta-wrap position-relative d-inline-block">
+      <a href="#registration" class="btn btn-primary cta-btn">Register Now</a>
+      <img src="assets/Cat_01.png" alt="Quantum Cat" class="cat-sticker">
+    </div>
+    </div>
+    </section>
+
+  <!-- About -->
+  <section id="about" class="panel bg-light">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        
+        <!-- Left: Image -->
+        <div class="col-lg-6 text-center">
+          <img src="assets/Theme.png" alt="100 Years of Quantum" 
+               class="img-fluid rounded about-main-img">
+        </div>
+      
+        <!-- Right: Text -->
+        <div class="col-lg-6">
+          <h2 class="section-heading mb-3">About</h2>
+          <p class="fs-5 mb-3">
+            Qiskit Fall Fest at UC San Diego is part of a global, student-run celebration of quantum computing. 
+            2025 marks a century of quantum mechanics — from the 1925–1926 foundations to today’s quantum devices and software.
+          </p>
+          <p class="fs-5 mb-3">
+            Qiskit is IBM’s open-source SDK for building, simulating, and running quantum circuits on real hardware. 
+            It powers learning, research, and industry-scale quantum development worldwide.
+          </p>
+          <p class="fs-5 mb-4">
+            Fall Fest is the largest collection of student-run quantum events worldwide, bringing workshops, 
+            hack nights, talks, and community projects to campuses every autumn.
+          </p>
+
+          <!-- Buttons -->
+          <div class="d-flex flex-wrap gap-3">
+            <a class="btn btn-dark d-inline-flex align-items-center gap-2 ibm-btn"
+              href="https://www.ibm.com/quantum/qiskit" target="_blank" rel="noopener"  style = "background-color: white; color: black">
+              <img src="assets/IBM Quantum Logo.png" alt="IBM Quantum" class="ibm-mark">
+            </a>
+          </div>
+        </div>
+      </div>
+
+    
+    </div>
+  </section>
+
+    
+  <!-- Schedule -->
+  <section id="schedule" class="panel">
+    <div class="container">
+      <h2 class="section-heading mb-3">Schedule</h2>
+      <div class="calendar-frame">
+        <iframe src="https://calendar.google.com/calendar/embed?src=c_f17e4bc6a7d6064bb8848458cdcb89fcc27a79a3ecab861de07bfb35eb0d4a8d%40group.calendar.google.com&ctz=America%2FLos_Angeles" style="border: 0" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="panel bg-light">
+    <div class="container">
+
+    <!-- Heading -->
+    <div class="text-center mb-4">
+      <h2 class="section-heading">Meet the Hosts</h2>
+      <p class="text-muted">Student organizers & community mentors</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Rebecca -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="card team-card h-100 text-center">
+          <img src="assets/Rebecca Breihan.jpg" alt="Rebecca Breihan" class="team-photo">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-1">Rebecca Breihan</h5>
+            <div class="text-muted mb-3">Lead Organizer</div>
+            <div class="mt-auto d-flex justify-content-center gap-3">
+              <a href="mailto:rbreihan@ucsd.edu" aria-label="Rebecca Breihan Email">
+                <img src="assets/mail_icon.png" alt="Email" class="icon-link">
+              </a>
+              <a href="https://www.linkedin.com/in/rebecca-breihan" target="_blank" rel="noopener" aria-label="Rebecca Breihan LinkedIn">
+                <img src="assets/linkedin_icon.png" alt="LinkedIn" class="icon-link">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anne -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="card team-card h-100 text-center">
+          <img src="assets/host2.jpg" alt="Host Two portrait" class="team-photo">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-1">Anne Kelley</h5>
+            <div class="text-muted mb-3">Co-Organizer</div>
+            <div class="mt-auto d-flex justify-content-center gap-3">
+              <a href="mailto:host2@example.com" aria-label="Email Host Two">
+                <img src="assets/mail_icon.png" alt="Email" class="icon-link">
+              </a>
+              <a href="https://linkedin.com/in/host2" target="_blank" rel="noopener" aria-label="LinkedIn Host Two">
+                <img src="assets/linkedin_icon.png" alt="LinkedIn" class="icon-link">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dan -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="card team-card h-100 text-center">
+          <img src="assets/host3.jpg" alt="Host Three portrait" class="team-photo">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-1">Dan Van</h5>
+            <div class="text-muted mb-3">Co-Organizer</div>
+            <div class="mt-auto d-flex justify-content-center gap-3">
+              <a href="mailto:host3@example.com" aria-label="Email Host Three">
+                <img src="assets/mail_icon.png" alt="Email" class="icon-link">
+              </a>
+              <a href="https://linkedin.com/in/host3" target="_blank" rel="noopener" aria-label="LinkedIn Host Three">
+                <img src="assets/linkedin_icon.png" alt="LinkedIn" class="icon-link">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kathleen -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="card team-card h-100 text-center">
+          <img src="assets/host4.jpg" alt="Host Four portrait" class="team-photo">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-1">Kathleen Ngo</h5>
+            <div class="text-muted mb-3">Co-Organizer</div>
+            <div class="mt-auto d-flex justify-content-center gap-3">
+              <a href="mailto:host4@example.com" aria-label="Email Host Four">
+                <img src="assets/mail_icon.png" alt="Email" class="icon-link">
+              </a>
+              <a href="https://linkedin.com/in/host4" target="_blank" rel="noopener" aria-label="LinkedIn Host Four">
+                <img src="assets/linkedin_icon.png" alt="LinkedIn" class="icon-link">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ryan -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <div class="card team-card h-100 text-center">
+          <img src="assets/host5.jpg" alt="Host Five portrait" class="team-photo">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-1">Ryan Batubara</h5>
+            <div class="text-muted mb-3">Co-Organizer</div>
+            <div class="mt-auto d-flex justify-content-center gap-3">
+              <a href="mailto:host5@example.com" aria-label="Email Host Five">
+                <img src="assets/mail_icon.png" alt="Email" class="icon-link">
+              </a>
+              <a href="https://linkedin.com/in/host5" target="_blank" rel="noopener" aria-label="LinkedIn Host Five">
+                <img src="assets/linkedin_icon.png" alt="LinkedIn" class="icon-link">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Registration -->
+<section id="registration" class="panel">
+  <div class="container text-center position-relative mega-cta">
+    <h2 class="section-heading mb-4">Secure place your place in the UCSD Qiskit Fall Fest</h2>
+
+    <!-- Big Button -->
+    <a href="https://your-registration-link.example" target="_blank" class="btn btn-register btn-lg">
+      Register Now
+    </a>
+
+    <!-- Sticker images -->
+    <img src="assets/Atom_01.png" alt="Atom sticker" class="sticker sticker-left">
+    <img src="assets/Timeline_01.png" alt="Timeline sticker" class="sticker sticker-right">
+
+  </div>
+</section>
+
+  <footer class="py-4 text-center">
+    <div class="container">
+      <small>© 2025 QCSD</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
